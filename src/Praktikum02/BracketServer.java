@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 public class BracketServer implements CommandExecutor {
 
     private static final HashMap<String, String> bracketMap = new HashMap<>();
+    private ArrayList<String> hallo = null;
 
     public BracketServer() {
         initBracketMap();
