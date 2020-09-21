@@ -46,7 +46,7 @@ public class BracketServer implements CommandExecutor {
     //Later solved with regex [<]/?[(a-z)|\d]+[>]
     private List<String> getBrackets(String arg) {
         List<String> bracketList = new ArrayList<>();
-        String pattern = "\\(|\\)|\\{|\\}|\\]|\\[|(<\\*?)|(\\*?>)";
+        String pattern = "\\(|\\)|\\{|}|]|\\[|(<\\*?)|(\\*?>)";
         Pattern regex = Pattern.compile(pattern);
         Matcher matcher = regex.matcher(arg);
         while(matcher.find()) {

@@ -70,7 +70,6 @@ public class ListTest {
         assertEquals(0, list.size());
     }
 
-    /*
     @Test
     public void testMixed() {
         list.clear();
@@ -90,7 +89,5 @@ public class ListTest {
             assertEquals(c1,c2);
         }
     }
-
-     */
 
 }

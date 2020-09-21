@@ -2,21 +2,21 @@ package Praktikum02;
 
 import java.util.AbstractList;
 
-public class MyList extends AbstractList {
+public class MyList extends AbstractList implements java.util.List{
 
     private Node head = null;
-    private Node tail = null;
 
     public boolean add(Object object) {
         Node node = new Node(null, null, object);
         if(head == null) {
             head = node;
-            tail = node;
         }else {
-            Node previousTail = tail;
-            tail = node;
-            tail.setPreviousNode(previousTail);
-            previousTail.setNextNode(tail);
+            Node currentNode = head;
+            while(currentNode.getNextNode() != null) {
+                currentNode = currentNode.getNextNode();
+            }
+            currentNode.setNextNode(node);
+            node.setPreviousNode(currentNode);
         }
         return true;
     }
@@ -37,11 +37,13 @@ public class MyList extends AbstractList {
             if(previousNode == null && nextNode == null) {
                 clear();
             }else if(previousNode == null) {
-                currentNode.getNextNode().setPreviousNode(null);
-                head = currentNode.getNextNode();
+                nextNode.setPreviousNode(null);
+                head = nextNode;
             }else if(nextNode == null){
-                currentNode.getPreviousNode().setNextNode(null);
-                tail = currentNode.getPreviousNode();
+                previousNode.setNextNode(null);
+            }else {
+                nextNode.setPreviousNode(previousNode);
+                previousNode.setNextNode(nextNode);
             }
         }
         return found;
@@ -50,7 +52,7 @@ public class MyList extends AbstractList {
     public Object get(int index) {
         int i = 0;
         Node currentNode = head;
-        while(i < index && currentNode != tail) {
+        while(i < index && i < size()) {
             currentNode = currentNode.getNextNode();
             i++;
         }
