@@ -38,6 +38,7 @@ public class BracketServer implements CommandExecutor{
     }
 
     //Later solved with regex
+    /*
     private String removeIrrelevantChar(String arg) {
         StringBuilder sb = new StringBuilder();
         for(char character : arg.toCharArray()) {
@@ -47,6 +48,7 @@ public class BracketServer implements CommandExecutor{
         }
         return sb.toString();
     }
+     */
 
     @Override
     public String execute(String command) throws Exception {

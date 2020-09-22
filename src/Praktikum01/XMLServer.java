@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class XMLServer implements CommandExecutor{
 
     public boolean checkWellFormed(String arg) {
-        List<String> tagList = getTockens(arg);
+        List<String> tagList = getTokens(arg);
         ListStack stack = new ListStack();
         boolean wellFormed = true;
         int i = 0;
@@ -30,7 +30,7 @@ public class XMLServer implements CommandExecutor{
         return wellFormed;
      }
 
-    private List<String> getTockens(String arg) {
+    private List<String> getTokens(String arg) {
         List<String> tagList = new ArrayList<>();
         String pattern = "[<]/?[(a-z)|\\d]+[>]";
         Pattern regex = Pattern.compile(pattern);

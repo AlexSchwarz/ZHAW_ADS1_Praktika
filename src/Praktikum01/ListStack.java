@@ -9,10 +9,6 @@ public class ListStack {
     private List<Object> list = new ArrayList<>();
     private static final int STACK_SIZE = 100;
 
-    public ListStack() {
-
-    }
-
     public void push(Object x) {
         assert(Objects.nonNull(x));
         if(isFull()) throw new StackOverflowError();

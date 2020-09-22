@@ -2,7 +2,7 @@ package Praktikum02;
 
 import java.util.AbstractList;
 
-public class MyList extends AbstractList implements java.util.List{
+public class MyListOld extends AbstractList implements java.util.List{
 
     private Node head = null;
 
@@ -11,26 +11,29 @@ public class MyList extends AbstractList implements java.util.List{
         if(head == null) {
             head = node;
         }else {
-            Node tempNode = getNode(size()- 1);
-            tempNode.setNextNode(node);
-            node.setPreviousNode(tempNode);
+            Node currentNode = head;
+            while(currentNode.getNextNode() != null) {
+                currentNode = currentNode.getNextNode();
+            }
+            currentNode.setNextNode(node);
+            node.setPreviousNode(currentNode);
         }
         return true;
     }
 
     public boolean remove(Object object) {
-        Node tempNode = head;
+        Node currentNode = head;
         boolean found = false;
-        while(tempNode != null && !found) {
-            if(tempNode.getObject().equals(object)) {
+        while(currentNode != null && !found) {
+            if(currentNode.getObject().equals(object)) {
                 found = true;
             }else {
-                tempNode = tempNode.getNextNode();
+                currentNode = currentNode.getNextNode();
             }
         }
         if(found) {
-            Node previousNode = tempNode.getPreviousNode();
-            Node nextNode = tempNode.getNextNode();
+            Node previousNode = currentNode.getPreviousNode();
+            Node nextNode = currentNode.getNextNode();
             if(previousNode == null && nextNode == null) {
                 clear();
             }else if(previousNode == null) {
@@ -47,17 +50,13 @@ public class MyList extends AbstractList implements java.util.List{
     }
 
     public Object get(int index) {
-        return getNode(index).getObject();
-    }
-
-    private Node getNode(int index) {
         int i = 0;
-        Node tempNode = head;
+        Node currentNode = head;
         while(i < index && i < size()) {
-            tempNode = tempNode.getNextNode();
+            currentNode = currentNode.getNextNode();
             i++;
         }
-        return tempNode;
+        return currentNode.getObject();
     }
 
     public boolean isEmpty() {
@@ -65,10 +64,10 @@ public class MyList extends AbstractList implements java.util.List{
     }
 
     public int size() {
-        Node tempNode = head;
+        Node currentNode = head;
         int i = 0;
-        while(tempNode != null) {
-            tempNode = tempNode.getNextNode();
+        while(currentNode != null) {
+            currentNode = currentNode.getNextNode();
             i++;
         }
         return i;
@@ -79,10 +78,10 @@ public class MyList extends AbstractList implements java.util.List{
     }
 
     public void printList() {
-        Node tempNode = head;
-        while(tempNode != null) {
-            System.out.print(tempNode.getObject());
-            tempNode = tempNode.getNextNode();
+        Node currentNode = head;
+        while(currentNode != null) {
+            System.out.print(currentNode.getObject());
+            currentNode = currentNode.getNextNode();
         }
         System.out.println();
     }

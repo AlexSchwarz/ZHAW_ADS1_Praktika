@@ -14,8 +14,7 @@ public class KGVServer implements CommandExecutor{
         Scanner scanner = new Scanner(new ByteArrayInputStream(inputString.getBytes()));
         int a = scanner.nextInt();
         int b = scanner.nextInt();
-        String outputString = Integer.toString(kgv(a, b));
-        return outputString;
+        return Integer.toString(kgv(a, b));
     }
 
     private int ggt(int a ,int b) {
