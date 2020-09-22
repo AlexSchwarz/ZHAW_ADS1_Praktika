@@ -85,4 +85,7 @@ public class MyListOld extends AbstractList implements java.util.List{
         }
         System.out.println();
     }
+
+
+
 }
