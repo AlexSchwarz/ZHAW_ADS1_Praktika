@@ -11,7 +11,7 @@ public class ListTest {
 
     @Before
     public void setUp() throws Exception {
-        list = new MyListOld();
+        list = new MyList();
     }
 
     @Test

@@ -4,7 +4,7 @@ import java.util.AbstractList;
 
 public class MyList extends AbstractList implements java.util.List{
 
-    private Node head = null;
+    protected Node head = null;
 
     public boolean add(Object object) {
         Node node = new Node(null, null, object);

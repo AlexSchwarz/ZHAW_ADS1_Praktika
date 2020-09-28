@@ -7,6 +7,7 @@ public class Node {
     private Node nextNode;
 
     public Node(Node nextNode, Node previousNode, Object object) {
+
         this.object = object;
         setNextNode(nextNode);
         setPreviousNode(previousNode);
