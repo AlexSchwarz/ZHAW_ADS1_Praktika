@@ -3,7 +3,7 @@ package Praktikum03;
 import java.util.*;
 import java.text.*;
 
-public class Competitor_ToDo {
+public class Competitor {
     private String name;
     private String country;
     private long time;
@@ -11,8 +11,24 @@ public class Competitor_ToDo {
     private int startNr;
     private int rank;
 
-    public Competitor_ToDo(int startNr, String name, int jg, String country, String time) {
-        // TODO: implement
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Competitor that = (Competitor) o;
+        return Objects.equals(name.toLowerCase(), that.name.toLowerCase());
+    }
+
+    public Competitor(int startNr, String name, int jg, String country, String time) {
+        this.startNr = startNr;
+        this.name = name;
+        this.jg = jg;
+        this.country = country;
+        try {
+            this.time = parseTime(time);
+        } catch (ParseException e) {
+            this.time = 1;
+        }
     }
 
     public void setRank(int rank) {
@@ -50,5 +66,4 @@ public class Competitor_ToDo {
         sb.append(df.format(new Date(time)));
         return sb.toString();
     }
-
 }
