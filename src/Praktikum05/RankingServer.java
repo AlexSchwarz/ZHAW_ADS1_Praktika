@@ -1,6 +1,9 @@
-package Praktikum03;
+package Praktikum05;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,7 +11,6 @@ import java.util.List;
 public class RankingServer implements CommandExecutor {
 
     private List<Competitor> readData(String string) {
-        System.out.println("Starting readData...");
         List<Competitor> competitorList = new ArrayList<>();
         Reader inputString = new StringReader(string);
         BufferedReader bufferedReader = new BufferedReader(inputString);
@@ -21,7 +23,6 @@ public class RankingServer implements CommandExecutor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("End readData...");
         return competitorList;
     }
 
@@ -55,9 +56,10 @@ public class RankingServer implements CommandExecutor {
     @Override
     public String execute(String command) {
         List<Competitor> competitorList = readData(command);
-        Collections.sort(competitorList, new ComparatorSortByTime());
-        iterateAndSetRank(competitorList);
-        Collections.sort(competitorList, new ComparatorSortByName());
-        return listToString(competitorList);
+        SortedBinaryTree<Competitor> sortedBinaryTree = new SortedBinaryTree<>();
+        for(Competitor competitor : competitorList) {
+            sortedBinaryTree.add(competitor);
+        }
+        return sortedBinaryTree.printTree();
     }
 }
