@@ -56,11 +56,6 @@ public class TreeTraversal<T extends Comparable<T>> implements Traversal<T> {
         levelorder(root, vistor);
     }
 
-    @Override
-    public void interval(T min, T max, Visitor<T> v) {
-        // to be done
-    }
-
     private void levelorder(TreeNode<T> node, Visitor<T> visitor) {
         Queue q = new LinkedList();
         if (node != null) q.add(node);
@@ -69,6 +64,21 @@ public class TreeTraversal<T extends Comparable<T>> implements Traversal<T> {
             visitor.visit(node.element);
             if (node.left !=null) q.add(node.left);
             if (node.right != null) q.add(node.right);
+        }
+    }
+
+    @Override
+    public void interval(T min, T max, Visitor<T> v) {
+        interval(root, min, max, v);
+    }
+
+    private void interval(TreeNode<T> node, T min, T max, Visitor<T> v) {
+        if (node != null) {
+            if (node.element.compareTo(min) > -1 && node.element.compareTo(max) < 1) {
+                v.visit(node.element);
+                interval(node.left, min, max, v);
+                interval(node.right, min, max, v);
+            }
         }
     }
 

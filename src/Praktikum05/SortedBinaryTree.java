@@ -75,12 +75,21 @@ public class SortedBinaryTree<T extends Comparable<T>> implements Tree<T> {
     }
 
     protected int calcHeight(TreeNode<T> node) {
-        return 0;
+        if(isEmpty()) {
+            return 0;
+        }
+        int leftHeight = calcSize(node.left);
+        int rightHeight = calcSize(node.right);
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 
-
     protected int calcSize(TreeNode p) {
-        return 0;
+        if(p == null) {
+            return 0;
+        }
+        int leftSubTree = calcSize(p.left);
+        int rightSubTree = calcSize(p.right);
+        return leftSubTree + rightSubTree + 1;
     }
 
     public int height() {
