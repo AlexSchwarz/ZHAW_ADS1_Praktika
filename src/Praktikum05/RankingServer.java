@@ -60,6 +60,8 @@ public class RankingServer implements CommandExecutor {
         for(Competitor competitor : competitorList) {
             sortedBinaryTree.add(competitor);
         }
+        System.out.println(sortedBinaryTree.size());
+        System.out.println(sortedBinaryTree.height());
         return sortedBinaryTree.printTree();
     }
 }

@@ -1,4 +1,4 @@
-package Praktikum05;
+package Praktikum06;
 
 import java.util.*;
 
@@ -71,7 +71,7 @@ public class SortedBinaryTree<T extends Comparable<T>> implements Tree<T> {
     }
 
     public Traversal<T> traversal() {
-        return new TreeTraversal<>(root);
+        return new TreeTraversal<T>(root);
     }
 
     protected int calcHeight(TreeNode<T> node) {
@@ -82,28 +82,36 @@ public class SortedBinaryTree<T extends Comparable<T>> implements Tree<T> {
         }
     }
 
-    protected int calcSize(TreeNode p) {
-        if(p == null) {
-            return 0;
-        }
-        int leftSubTree = calcSize(p.left);
-        int rightSubTree = calcSize(p.right);
-        return leftSubTree + rightSubTree + 1;
-    }
-
     public int height() {
         return calcHeight(root);
+    }
+
+    protected int calcSize(TreeNode p) {
+        if (p == null) {
+            return 0;
+        } else {
+            return p.count + calcSize(p.left) + calcSize(p.right);
+        }
     }
 
     public int size() {
         return calcSize(root);
     }
 
-    public boolean balanced() {
-        throw new UnsupportedOperationException();
+    private boolean balanced(TreeNode<T> node) {
+        if (node == null) {
+            return true;
+        } else {
+            return Math.abs(calcHeight(node.left) - calcHeight(node.right)) < 2
+                    && balanced(node.left) && balanced(node.right);
+        }
     }
 
-    // only for testing and debugging purposes: show the structure of the tree
+    public boolean balanced() {
+        return balanced(root);
+    }
+
+    // only for testing and debugging: show the structure of the tree
     public String printTree() {
         StringBuilder out = new StringBuilder();
         if (root.right != null) {
