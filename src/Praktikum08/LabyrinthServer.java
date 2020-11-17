@@ -1,12 +1,18 @@
 package Praktikum08;
 
-
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class LabyrinthServer implements CommandExecutor{
 
-    private static final double SCALE = 11;
+    final double SCALE = 10;
+
+    private Graph<LabyrinthNode<Object>, Edge<Object>> graph;
+    private static final String startNode = "0-6";
+    private static final String goal = "3-0";
+
 
     private void drawPath(ServerGraphics g, String from, String to, boolean mouse) {
         double xh0 = from.charAt(0) - '0';
@@ -29,16 +35,68 @@ public class LabyrinthServer implements CommandExecutor{
 
     @Override
     public String execute(String command) throws Exception {
+        graph = new AdjListGraph<>(LabyrinthNode.class, Edge.class);
         ServerGraphics serverGraphics = new ServerGraphics();
         serverGraphics.setColor(Color.white);
-        try(Scanner scanner = new Scanner(command)) {
-            while(scanner.hasNext()) {
+        try (Scanner scanner = new Scanner(command)) {
+            while (scanner.hasNext()) {
                 String[] arguments = scanner.nextLine().split(" ");
                 drawPath(serverGraphics, arguments[0], arguments[1], false);
+                graph.addEdge(arguments[0], arguments[1], 1);
+                graph.addEdge(arguments[1], arguments[0], 1);
+
             }
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
+
+        initGraph(graph);
+        search(startNode);
+
+        LabyrinthNode<Object> destination = graph.findNode(goal);
+        List<Node<Object>> path = new ArrayList<>();
+
+        while(destination.getPrev() != null) {
+            path.add(0, destination);
+            destination = destination.getPrev();
+        }
+        serverGraphics.setColor(Color.red);
+        path.add(0, graph.findNode(startNode));
+
+        for(int i = 1; i < path.size(); i++) {
+            drawPath(serverGraphics, path.get(i-1).getName(), path.get(i).getName(), true);
+        }
+
+
         return serverGraphics.getTrace();
+
     }
+
+    private boolean search(String node) {
+        LabyrinthNode currentNode = graph.findNode(node);
+        currentNode.setMarked(true);
+        if(currentNode.getName().equals(goal)) return true;
+        else {
+            for(Object edge:  currentNode.getEdges()) {
+                LabyrinthNode<Object> neighbour = (LabyrinthNode<Object>) ((Edge<Object>) edge).getDest();
+                if(!neighbour.isMarked()) {
+                    if(search(neighbour.getName())) {
+                        neighbour.setPrev(currentNode);
+                        return true;
+                    }
+                }
+            }
+        }
+        currentNode.setMarked(false);
+        return false;
+    }
+
+
+    private void initGraph(Graph<LabyrinthNode<Object>, Edge<Object>> graph) {
+        for(LabyrinthNode node: graph.getNodes()) {
+            node.setMarked(false);
+            node.setPrev(null);
+        }
+    }
+
 }
