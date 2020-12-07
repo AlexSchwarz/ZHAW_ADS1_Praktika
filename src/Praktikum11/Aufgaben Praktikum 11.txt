@@ -1,0 +1,13 @@
+Algorythmen und Datenstrukturen Praktikum 11
+
+Aufgabe 1:
+
+AUSTAUSCH – AUFBAUSCH	-> 2
+BARBAREN – BARBARA 	-> 2
+COCACOLA – COCAINA	-> 3
+
+Aufgabe 2:
+
+IP-Adressen: ^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\\.(?!$)|$)){4}$
+
+E-Mail: .+\@.+\..+

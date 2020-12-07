@@ -11,18 +11,17 @@ import java.util.regex.Pattern;
 
 public class TelSearchServer implements CommandExecutor{
 
-    private static final String REGEX = "(\\d{3})( )(\\d{3})( )(\\d{2})( )(\\d{2})";
+    private static final String REGEX = "(\\+41)\\d{9}";
 
     @Override
     public String execute(String command) throws Exception {
         URL url = buildURL(command);
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
         Pattern pattern = Pattern.compile(REGEX);
-        System.out.println("****** Search Content of URL ********");
+        System.out.println("****** Search Content of URL for tel. number ********");
         try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()))){
             String input;
             while ((input = br.readLine()) != null) {
-                //System.out.println(input);
                 Matcher matcher = pattern.matcher(input);
                 while(matcher.find()) {
                     System.out.println("found: " + matcher.group());
