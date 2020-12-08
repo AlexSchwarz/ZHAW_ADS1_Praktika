@@ -5,7 +5,7 @@
  * @version 1.0 -- Geruest fuer irgendeinen Server
  */
 
-package Praktikum12;
+package Praktikum10;
 
 public class AnyServer implements CommandExecutor {
 

@@ -5,11 +5,9 @@
  * @version 1.0 -- Factory zur Erstellung von Server Objekten
  * @version 2.0 -- Dynamisches Nachladen
  */
-package Praktikum12;
+package Praktikum10;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 
 /* Classloader that handles file path of class
  */
