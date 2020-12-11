@@ -6,19 +6,24 @@ import java.util.Random;
 public class QuickerSort{
 
     private static final int MAX_ARRAY_VALUE = 1000000;
-    private static final int MAX_THRESHOLD = 50;
+    private static final int MAX_THRESHOLD = 200;
+    private static final int DEFAULT_THRESHOLD = 50;
     private static final int ARRAY_SIZE = 10000;
     private static final Random random = new Random();
     private static int threshold;
 
     public static void main(String[] args) {
         //Aufgabe 1:
-            //sort();
+            sort();
+
         //Aufgabe 2:
             //int bestThreshold = compareSortingTimeBasedOnThresholdSize(ARRAY_SIZE, MAX_THRESHOLD);
             //System.out.println("The threshold with the shortest sort-time is: " + bestThreshold);
+
+            //Optimal bei Threshold = 26 (Siehe .PNG)
+
         //Aufgabe 3:
-        sortWithThread();
+            sortWithThread();
     }
 
     private static void sortWithThread() {
@@ -31,6 +36,7 @@ public class QuickerSort{
         int[] array = generateArray(ARRAY_SIZE);
         int leftIndex = 0;
         int rightIndex = array.length -1;
+        threshold = DEFAULT_THRESHOLD;
         quickerSort(array, leftIndex, rightIndex);
         System.out.println("Is sorted: " + checkSort(array));
     }
