@@ -86,4 +86,17 @@ public class MyList extends AbstractList implements java.util.List{
         }
         System.out.println();
     }
+
+    public void print() {
+        System.out.println(recursion(head, 0));
+    }
+
+    public int recursion(Node n, int i) {
+        if(n.getNextNode() != null) {
+            i = recursion(n.getNextNode(), i);
+        }
+        i++;
+        System.out.println(n.getObject().toString() + i);
+        return i;
+    }
 }

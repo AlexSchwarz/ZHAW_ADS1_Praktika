@@ -67,11 +67,13 @@ public class Storage {
         List<Collectable> fieldList = new LinkedList<Collectable>();
         for (int i = 0; i < fields.length; i++) {
             try {
-                Object o = fields[i].get(obj);
-                if (o instanceof Collectable) {
-                    fieldList.add((Collectable) o);
+                Object object = fields[i].get(obj);
+                if (object instanceof Collectable) {
+                    fieldList.add((Collectable) object);
                 }
-            } catch (Exception ex) {}
+            } catch (Exception exception) {
+                System.out.println("hallo leo");
+            }
         }
         return fieldList;
     }
